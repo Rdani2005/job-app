@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 export const authContext = createContext()
 
 export default function ContextProvider({ children }) {
-    const [authContext, setAuth] = useState(
+    const [auth, setAuth] = useState(
         {
             id: "",
             name: "",
@@ -14,8 +14,7 @@ export default function ContextProvider({ children }) {
     const [typeAccount, setTypeAccount] = useState("")
 
     const [jobs, setJobs] = useState()
-
-    
+        
 
     return (
         <authContext.Provider

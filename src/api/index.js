@@ -33,7 +33,7 @@ const get = (url, data) => {
     return instance.get(url, data)
 }
 
-const getWithToken = (url, data) => {
+const getWithToken = async (url, data) => {
     const token = localStorage.getItem("token")
 
     if (token) {
@@ -56,7 +56,7 @@ const put = (url, data) => {
     return instance.get(url, data)
 }
 
-const putWithToken = (url, data) => {
+const putWithToken = async (url, data) => {
     const token = localStorage.getItem("token")
 
     if (token) {
