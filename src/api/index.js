@@ -29,15 +29,15 @@ const postWithToken = async (url, data) => {
     }
 }
 
-const get = (url, data) => {
-    return instance.get(url, data)
+const get = (url) => {
+    return instance.get(url)
 }
 
-const getWithToken = async (url, data) => {
+const getWithToken = async (url) => {
     const token = localStorage.getItem("token")
 
     if (token) {
-        return await instance.get(url, data, {
+        return await instance.get(url, {
             headers: {
                 'Authorization': "Bearer " + token
             }

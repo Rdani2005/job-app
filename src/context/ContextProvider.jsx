@@ -7,6 +7,7 @@ export default function ContextProvider({ children }) {
         {
             id: "",
             name: "",
+            role: "",
             logged: false
         }
     )
@@ -14,12 +15,14 @@ export default function ContextProvider({ children }) {
     const [typeAccount, setTypeAccount] = useState("")
 
     const [jobs, setJobs] = useState()
-        
+
+
+
 
     return (
         <authContext.Provider
             value={{
-                auth,setAuth,
+                auth, setAuth,
                 typeAccount, setTypeAccount,
                 jobs, setJobs
             }}

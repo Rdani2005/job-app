@@ -40,9 +40,10 @@ const SignUp = () => {
                 setAuth({
                     id: data.user.id,
                     name: data.user.name,
+                    role: data.user.role,
                     logged: true
                 })
-                navigate('/')
+                navigate('/home')
             })
             .catch(error => {
                 setError({

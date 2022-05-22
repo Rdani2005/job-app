@@ -6,7 +6,7 @@ import { post } from '../api'
 import { useNavigate } from 'react-router-dom'
 const Login = () => {
 
-    const { auth, setAuth } = useContext(authContext)
+    const { setAuth } = useContext(authContext)
 
     const email = useRef()
 
@@ -14,6 +14,9 @@ const Login = () => {
 
 
     const navigate = useNavigate()
+
+
+
     const login = (event) => {
         event.preventDefault()
 
@@ -28,9 +31,12 @@ const Login = () => {
                 setAuth({
                     id: user.id,
                     name: user.name,
+                    role: user.role,
                     logged: true
                 })
-                navigate("/", { replace: true })
+
+                navigate("/home")
+              
 
             })
             .catch(error => {
@@ -39,6 +45,7 @@ const Login = () => {
                 email.current.value = ""
                 password.current.value = ""
             })
+
     }
 
     return (

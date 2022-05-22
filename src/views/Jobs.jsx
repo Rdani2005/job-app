@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { postWithToken } from '../api'
+// ----------- Own Files ------------------------
+import { getWithToken } from '../api'
 import { authContext } from '../context/ContextProvider'
 
 let getContent = (job) => {
@@ -14,28 +15,42 @@ let getContent = (job) => {
 
 }
 
-const AplyJob = () => {
+const Jobs = () => {
 
-    const [apllies, setApplies] = useState()
+    const { auth, jobs, setJobs } = useContext(authContext)
 
-    const { auth } = useContext(authContext)
     useEffect(() => {
-        postWithToken('/api/jobs/me')
-            .then(response => {
-                setApplies(response.data)
-                console.log("Respuesta", response.data)
-                console.log("Jobs", apllies)
+        getWithToken('/api/jobs')
+            .then((response) => {
+                console.log(response.data)
+
+                setJobs(response.data)
 
             })
-            .catch(error => {
-                console.log(error);
-            })
+            .catch(error => console.log(error))
+        console.log("jobs: ", jobs)
     }, [])
 
+    if (!auth.logged) {
+        return (
+            <main className="h-screen flex justify-center item-center flex-col">
+                <h1 className="text-8xl underline text-center">
+                    Debes ingresar primero!
+                </h1>
+                <div className="flex justify-center items-center">
+                    <Link to="/" className="my-12 mx-6 py-2 px-4 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-900">Ir al home</Link>
+                    <Link to="/login" className="my-12 mx-6 py-2 px-4 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-900">Login</Link>
+                </div>
+            </main>
+        )
+    }
+
+
+
     return (
-        <main className='min-h-screen'>
+        <main>
             <h1 className="text-center text-xl text-white">
-                Empleos Aplicados
+                Empleos Disponibles
             </h1>
             {
                 auth.logged && (
@@ -43,7 +58,7 @@ const AplyJob = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto">
 
                         {
-                            apllies.map((job) => {
+                            jobs.map((job) => {
                                 return (
                                     <div key={job._id} className="mx-6 my-6 p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                                         <Link to={`/jobs/job/${job._id}`}>
@@ -71,22 +86,4 @@ const AplyJob = () => {
     )
 }
 
-export default AplyJob
-// Body
-// {
-//     "employer":{
-//         "id": "6282ff71d83d04d1bb29a387",
-//         "name": "Tzuzul",
-//         "email": "mail@tzuzulcode.com",
-//         "role": "admin"
-//     },
-//     "description":"Descripción de la oferta de empleo",
-//     "title":"Back end developer Node JS, JavaScript, Mongo DB",
-//     "category":["Node JS","JavaScript","Mongo DB"],
-//     "location":{
-//         "country":"México",
-//         "province":"CDMX",
-//         "City":"CDMX"
-//     },
-//     "salary":110000
-// }
+export default Jobs

@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { authContext } from '../../context/ContextProvider'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Dropdown = () => {
 
     const [options, setOptions] = useState(false)
 
     const { auth, setAuth } = useContext(authContext)
 
+    const navigate = useNavigate()
 
     const handleOptionClick = () => {
         setOptions(!options)
@@ -20,6 +21,7 @@ const Dropdown = () => {
             name: "",
             id: ""
         })
+        navigate("/")
     }
 
 
@@ -32,27 +34,46 @@ const Dropdown = () => {
             >
                 Perfil
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
 
             {/* <!-- Dropdown menu --> */}
             {
                 options && (
-                    <div id="dropdownNavbar" className="mt-52 absolute z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <div id="dropdownNavbar" className="mt-72 mr-52 absolute z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <p className='block px-4 py-2 text-white my-5'>
+                                <Link to="/home" className='block px-4 py-2 text-white my-5'>
 
                                     {auth.name}
+                                </Link>
+                                <p className='block px-4 py-2 text-xs dark:hover:text-white mb-5'>
+                                    {auth.role}
                                 </p>
                             </li>
-                            <li>
-                                <Link to="/aplicaciones" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Aplicaciones Hechas</Link>
-                            </li>
+                            {
+                                (auth.role === "applicant") && <li>
+                                    <Link to="/jobs/apply" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        Trabajos Aplicados
+                                    </Link>
+                                </li>
+                            }
+                            {
+                                (auth.role === "employer") && <li>
+                                    <Link to="/jobs/apply" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        Empleos Subidos
+                                    </Link>
+                                </li>
+                            }
                         </ul>
                         <div className="py-1">
-                            <button onClick={handleLogOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Sign out</button>
+                            <button
+                                onClick={handleLogOut}
+                                className="block mx-auto my-2 px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-700 rounded"
+                            >
+                                Sign out
+                            </button>
                         </div>
                     </div>
 
