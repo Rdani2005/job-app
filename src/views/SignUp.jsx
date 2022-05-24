@@ -14,15 +14,15 @@ const SignUp = () => {
     const email = useRef()
     const password = useRef()
     const role = useRef()
-
+    
     const navigate = useNavigate()
-
+    // Define error handles
     const [error, setError] = useState({
         isError: false,
         message: "",
         loading: false
     })
-
+    // Send a new user throw the API
     const handleSubmit = (event) => {
         event.preventDefault()
 
@@ -40,6 +40,7 @@ const SignUp = () => {
                 setAuth({
                     id: data.user.id,
                     name: data.user.name,
+                    email: data.user.email,
                     role: data.user.role,
                     logged: true
                 })

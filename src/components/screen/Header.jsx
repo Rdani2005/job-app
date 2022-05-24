@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo_transparent from '../../assets/logo/logo_transparent.png'
 import { authContext } from '../../context/ContextProvider'
@@ -41,6 +41,7 @@ const Header = () => {
             </nav>
         </header>
     )
+
 }
 
 export default Header

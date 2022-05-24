@@ -12,11 +12,11 @@ const Login = () => {
 
     const password = useRef()
 
-
+    // Return to home
     const navigate = useNavigate()
 
 
-
+    // Login logic
     const login = (event) => {
         event.preventDefault()
 
@@ -31,6 +31,7 @@ const Login = () => {
                 setAuth({
                     id: user.id,
                     name: user.name,
+                    email: user.email,
                     role: user.role,
                     logged: true
                 })
