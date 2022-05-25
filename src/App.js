@@ -10,6 +10,8 @@ import Jobs from './views/Jobs';
 // --------------- Components --------------------------------
 import Header from './components/screen/Header'
 import Footer from './components/screen/Footer'
+import JobsAdded from './views/JobsAdded';
+import AddJobs from './views/AddJobs';
 // --------------- Main Component ----------------------------
 function App() {
     return (
@@ -22,7 +24,8 @@ function App() {
                 <Route path='/login' element={<Login/>}></Route>
                 <Route path='/SignUp' element={<SignUp/>}></Route>
                 <Route path='/jobs/job/:id' element={<Job/>}></Route>
-                <Route path='/jobs/add' element={<Home/>} ></Route>
+                <Route path='/jobs/add' element={<AddJobs/>} ></Route>
+                <Route path='/jobs/added' element={<JobsAdded/>} ></Route>
                 <Route path='/jobs/apply' element={<AplyJob/>}></Route>
             </Routes>
             <Footer></Footer>

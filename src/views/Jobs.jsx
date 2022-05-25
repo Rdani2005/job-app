@@ -2,47 +2,55 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 // ----------- Own Files ------------------------
-import { getWithToken } from '../api'
+import { getWithToken, postWithToken } from '../api'
 import { authContext } from '../context/ContextProvider'
 
-let getContent = (description) => {
-    let content = description.replaceAll('\n', ' ')
+// let getContent = (description) => {
+//     let content = description.replaceAll('\n', ' ')
 
-    if (content.length > 50) {
-        return content.slice(0, 50) + '...'
-    }
+//     if (content.length > 50) {
+//         return content.slice(0, 50) + '...'
+//     }
 
-    return content
+//     return content
 
-}
+// }
 
 const Jobs = () => {
 
     const { auth } = useContext(authContext)
     const [jobs, setJobs] = useState()
-    const [loading, setLoading] = useState(true)
-    // const [loading, setLoading] = useState(false)
-    // Get the jobs
-    // useEffect(() => {
-    //     getWithToken('/api/jobs')
-    //         .then((response) => {
-    //             console.log(response.data)
 
-    //             setJobs(response.data)
-
-    //         })
-    //         .catch(error => console.log(error))
-    //     console.log("jobs: ", jobs)
-    // }, [])
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         getWithToken('/api/jobs')
             .then(({ data }) => {
                 setJobs(data)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log("error")
+                
+            })
 
     }, [])
+
+    const handleFilter = (event) => {
+
+
+        postWithToken("/api/jobs/category", {
+            category: search.split(' ')
+        })
+            .then(({ data }) => {
+                setJobs(data)
+            })
+            .catch((error) => {
+                console.log("error")
+            })
+
+
+
+    }
 
     if (!auth.logged) {
         return (
@@ -62,9 +70,21 @@ const Jobs = () => {
 
     return (
         <main>
-            <h1 className="text-center text-xl text-white">
-                Empleos Disponibles
-            </h1>
+            <div className="flex">
+
+                <h1 className="text-center text-xl text-white">
+                    Empleos Disponibles
+                </h1>
+                <input
+                    type="text"
+                    onChange={e => setSearch(e.target.value)}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <button onClick={handleFilter}>
+                    Filtrar
+                </button>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 {
                     jobs && (
@@ -80,7 +100,7 @@ const Jobs = () => {
                                             </Link>
                                             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                                                 {
-                                                   job.description
+                                                    job.description
                                                 }
                                             </p>
                                             <Link to={`/jobs/job/${job._id}`} className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

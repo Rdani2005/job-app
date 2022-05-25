@@ -29,7 +29,7 @@ const Dropdown = () => {
         <>
             <button
 
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="ml-24 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={handleOptionClick}
             >
                 Perfil
@@ -61,11 +61,20 @@ const Dropdown = () => {
                             }
                             {
                                 (auth.role === "employer") && <li>
-                                    <Link to="/jobs/apply" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <Link to="/jobs/added" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         Empleos Subidos
                                     </Link>
                                 </li>
                             }
+
+                            {
+                                (auth.role === "employer") && <li>
+                                    <Link to="/jobs/add" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        Agregar Trabajos
+                                    </Link>
+                                </li>
+                            }
+
                         </ul>
                         <div className="py-1">
                             <button

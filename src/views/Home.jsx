@@ -19,7 +19,7 @@ const Home = () => {
 
         return (
 
-            <main>
+            <main className="min-h-screen">
                 <Slider />
             </main>
         )

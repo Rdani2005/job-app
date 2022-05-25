@@ -50,7 +50,7 @@ const Login = () => {
     }
 
     return (
-        <main className="h-screen flex items-center justify-center">
+        <main className="min-h-screen flex items-center justify-center">
             <form className='w-9/12 h-3/6 flex flex-col justify-center' onSubmit={login}>
                 <div className="mb-6">
                     <img src={logo_transparent} alt="" className='w-1/2 mx-auto' />

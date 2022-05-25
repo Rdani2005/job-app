@@ -58,7 +58,7 @@ const SignUp = () => {
     }
 
     return (
-        <main className="h-screen flex items-center justify-center">
+        <main className="min-h-screen flex items-center justify-center">
             <form onSubmit={handleSubmit} className="w-9/12 flex flex-col justify-center">
                 <div className="mb-6">
                     <img src={logo_transparent} alt="" className='w-1/2 mx-auto' />
