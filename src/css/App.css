@@ -12,9 +12,10 @@
 }
 
 body {
-    background-color: #2d3031;
-    color: #f6f9f8;
-    font-family: 'Nunito', sans-serif;
+    background: #000428; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #000428, #004e92); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #000428, #004e92); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   
 }
 
 main {
@@ -27,3 +28,11 @@ h1 {
     font-weight: bold;
 }
 
+.bg-cristal {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.2px);
+    -webkit-backdrop-filter: blur(2.2px);
+    border: 1px solid rgba(255, 255, 255, 0.53);
+}
