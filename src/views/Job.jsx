@@ -32,7 +32,7 @@ const Job = () => {
     }
 
     return (
-        <main className="h-screen flex items-center justify-center flex-col">
+        <main className="h-screen flex items-center justify-center flex-col text-white">
             <h1 className="text-center text-2xl mb-6">
                 {job.title}
             </h1>
